@@ -1,0 +1,6 @@
+[book]
+authors = ["lightsing"]
+language = "zh-Hans"
+multilingual = false
+src = "src"
+title = "VLEGEND 脚本开发指南"
