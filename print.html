@@ -1,0 +1,439 @@
+<!DOCTYPE HTML>
+<html lang="zh-Hans" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>VLEGEND 脚本开发指南</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="lua/index.html"><strong aria-hidden="true">1.</strong> Lua 环境</a></li><li class="chapter-item expanded "><a href="getting-started/index.html"><strong aria-hidden="true">2.</strong> 开始编写</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="getting-started/define-entity.html"><strong aria-hidden="true">2.1.</strong> 定义实体</a></li></ol></li><li class="chapter-item expanded "><a href="api/index.html"><strong aria-hidden="true">3.</strong> API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="api/fraction.html"><strong aria-hidden="true">3.1.</strong> 阵营</a></li><li class="chapter-item expanded "><a href="api/event.html"><strong aria-hidden="true">3.2.</strong> 事件</a></li><li class="chapter-item expanded "><a href="api/utils.html"><strong aria-hidden="true">3.3.</strong> 实用工具</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">VLEGEND 脚本开发指南</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="lua-环境"><a class="header" href="#lua-环境">Lua 环境</a></h1>
+<p>您编写的 Lua 脚本将在 VLEGEND 的特定 Lua 运行环境中运行。
+这个环境是沙盒化的，因此它与直接在命令行中运行 Lua 脚本会有一些不同。
+这主要是因为在沙盒环境中，我们可以对脚本的运行环境进行更多的控制和约束，以增强安全性和稳定性。</p>
+<p>目前我们的运行环境使用的是 <a href="https://www.lua.org/manual/5.4/">Lua 5.4</a>，一个非常强大且灵活的嵌入式编程语言。</p>
+<h2 id="某些基础函数的限制"><a class="header" href="#某些基础函数的限制">某些基础函数的限制</a></h2>
+<p>在 VLEGEND 的 Lua 运行环境中，部分基础函数是不可用的。这些包括：</p>
+<ul>
+<li><a href="https://www.lua.org/manual/5.4/manual.html#pdf-dofile">dofile</a>：在 Lua 环境中运行一个文件</li>
+<li><a href="https://www.lua.org/manual/5.4/manual.html#pdf-load">load</a>：动态加载 Lua 代码</li>
+<li><a href="https://www.lua.org/manual/5.4/manual.html#pdf-loadfile">loadfile</a>：加载并运行 Lua 文件</li>
+<li><a href="https://www.lua.org/manual/5.4/manual.html#pdf-print">print</a>：在控制台打印文本</li>
+</ul>
+<p>为了替代 <code>print</code>，您可以使用 <a href="lua/../api/logs.html"><code>logging</code></a> 模块来记录和查看运行日志。</p>
+<h2 id="可用的-lua-标准库"><a class="header" href="#可用的-lua-标准库">可用的 Lua 标准库</a></h2>
+<p>虽然有一些 Lua 库无法在 VLEGEND 的环境中使用，但我们仍提供了一些基础且实用的 Lua 标准库供您使用。以下是当前环境中可用的标准库：</p>
+<ul>
+<li><a href="https://www.lua.org/manual/5.4/manual.html#6.2">coroutine</a>：提供对协程的支持，以实现复杂的控制流</li>
+<li><a href="https://www.lua.org/manual/5.4/manual.html#6.4">string</a>：对字符串操作的功能，如查找，替换，模式匹配等</li>
+<li><a href="https://www.lua.org/manual/5.4/manual.html#6.5">utf8</a>：对 UTF-8 编码字符串的操作功能</li>
+<li><a href="https://www.lua.org/manual/5.4/manual.html#6.6">table</a>：Lua 的关联数组实现，提供了一系列操作和管理表的功能</li>
+<li><a href="https://www.lua.org/manual/5.4/manual.html#6.7">math</a>：提供一套广泛的数学函数和常数</li>
+</ul>
+<p>这些库可以帮助您快速实现各种功能，使您的脚本更强大，更高效。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="开始编写"><a class="header" href="#开始编写">开始编写</a></h1>
+<p>这一部分将教你如何使用 Lua 脚本来定义卡牌。</p>
+<h2 id="核心概念"><a class="header" href="#核心概念">核心概念</a></h2>
+<p>我们将通过脚本定义的卡牌和随从称为原型（Prototype）。在游戏引擎运行时，实际的卡牌和随从实体将基于这些原型生成。</p>
+<h3 id="实体-entity"><a class="header" href="#实体-entity">实体 Entity</a></h3>
+<p>实体是游戏中最基本的元素之一，其中既包括随从，也包括玩家。</p>
+<h3 id="卡牌-card"><a class="header" href="#卡牌-card">卡牌 Card</a></h3>
+<p>目前，我们的引擎支持三种类型的卡牌：</p>
+<ul>
+<li>随从卡（Minion）</li>
+<li>魔法卡（Magic）</li>
+<li>装备卡（Equipment）</li>
+</ul>
+<p>随从卡无需特别定义，只要定义了随从，对应的随从卡就会自动生成。</p>
+<h3 id="事件-event"><a class="header" href="#事件-event">事件 Event</a></h3>
+<p>我们的引擎是事件驱动的，玩家的操作或随从的能力都可能触发事件。实体通过监听这些事件，并做出相应的反应。</p>
+<p>以下是引擎目前所支持的事件：</p>
+<ul>
+<li>实体死亡：Death</li>
+<li>玩家丢弃卡牌（包括使用）：DiscardCard</li>
+<li>实体获得效果：GiveEffect</li>
+<li>当前玩家变更：PlayerChanged</li>
+<li>新实体生成：Spawn</li>
+<li>玩家获得新卡牌：ReceiveCard</li>
+<li>实体效果移除：RemoveEffect</li>
+<li>实体受到伤害：TakeDamage</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="定义实体原型-entityprototype"><a class="header" href="#定义实体原型-entityprototype">定义实体原型 EntityPrototype</a></h1>
+<p>在定义一个实体原型时，你必须包括以下信息：</p>
+<ul>
+<li>唯一ID：id（应为唯一的 UUID 字符串）</li>
+<li>显示名称：name</li>
+<li>描述文本：description</li>
+<li>阵营：fraction（请参照 <a href="getting-started/../api/fraction.html">Fraction</a> 的文档说明）</li>
+<li>血量：hp</li>
+<li>攻击力：attack</li>
+</ul>
+<p>实体原型有一些默认值，如果这些默认值符合你的期待，你无需特别提供：</p>
+<ul>
+<li>冲锋：charged；默认值为 <code>false</code></li>
+<li>衍生卡牌定义：is_card；默认值为 <code>true</code></li>
+</ul>
+<p>如果实体原型是衍生卡牌，你还需要提供以下信息：</p>
+<ul>
+<li>费用：cost</li>
+</ul>
+<h2 id="定义无监听器的实体原型"><a class="header" href="#定义无监听器的实体原型">定义无监听器的实体原型</a></h2>
+<p>许多随从，特别是中立随从，没有特殊能力，也不会对事件做出响应。</p>
+<p>下面是一个例子：</p>
+<pre><code class="language-lua">local definition = EntityPrototype:new {
+    id = &quot;f463db29-6a1b-4b3d-9af4-a6540ec63c11&quot;,
+    name = &quot;1/1&quot;,
+    description = &quot;1/1冲锋&quot;,
+    fraction = Fraction.Neutral,
+    hp = 1,
+    attack = 1,
+    charged = true,
+    cost = 1,
+}
+
+return definition
+</code></pre>
+<h2 id="定义非衍生卡牌的实体原型"><a class="header" href="#定义非衍生卡牌的实体原型">定义非衍生卡牌的实体原型</a></h2>
+<p>有些随从不以卡牌形式存在，但可能会由于其他效果被召唤到场上。在这种情况下，你需要明确设置 <code>is_card = false</code>。</p>
+<p>下面是一个例子：</p>
+<pre><code class="language-lua">local definition = EntityPrototype:new {
+    id = &quot;4cdb4a11-e631-44cb-bd11-d55a9df673d7&quot;,
+    name = &quot;1/1&quot;,
+    description = &quot;1/1&quot;,
+    fraction = Fraction.Neutral,
+    hp = 1,
+    attack = 1,
+    is_card = false,
+}
+
+return definition
+</code></pre>
+<h2 id="定义有监听器的实体原型"><a class="header" href="#定义有监听器的实体原型">定义有监听器的实体原型</a></h2>
+<p>首先，你需要额外添加一个 <code>listener</code> 值，该值告诉引擎这个实体会监听哪些事件。我们以亡语为例进行解释。</p>
+<p>首先，按照前面的方式定义实体原型：</p>
+<pre><code class="language-lua">local definition = EntityPrototype:new {
+    id = &quot;f96acaf7-537b-4222-b282-2f7382ac4a46&quot;,
+    name = &quot;2/1&quot;,
+    description = &quot;2/1亡语：抽一张牌&quot;,
+    fraction = Fraction.Neutral,
+    hp = 2,
+    attack = 1,
+    cost = 2,
+}
+</code></pre>
+<p>然后，我们需要定义事件发生时的行为：</p>
+<pre><code class="language-lua">local on_death = function(ctx, event, entity)
+    -- 在这里定义亡语的行为
+end
+</code></pre>
+<p>可以看到，我们定义了一个函数，它接收三个参数，分别是游戏上下文 <code>ctx</code>、当前事件 <code>event</code> 以及接收该事件的实体 <code>entity</code>。</p>
+<p>通过 <code>ctx</code>，我们可以操作游戏内部的状态，而 <code>event</code> 告诉我们具体发生了什么事件。
+由于原型定义和实体是分开的，所以第三个参数 <code>entity</code> 会传入实际由该原型创建的实体。</p>
+<p>在这个例子中，我们首先需要检查是否是由自身产生的事件：</p>
+<pre><code class="language-lua">if event.id ~= entity.id then
+    return
+end
+</code></pre>
+<p>接下来，我们执行亡语的行为：</p>
+<pre><code class="language-lua">local player = ctx.getEntityOwner(entity) -- 找到实体的所有者
+player.drawCard() -- 执行抽卡
+</code></pre>
+<p>但这还不够，因为抽卡可能会引发事件：</p>
+<ul>
+<li>当成功抽卡时，会触发 <code>ReceiveCard</code> 事件</li>
+<li>当手牌已满时，会触发 <code>ReceiveCard</code> 和 <code>DiscardCard</code> 事件</li>
+<li>当没有牌可抽时，会因疲劳受到伤害：
+<ul>
+<li>如果玩家没有圣盾，会触发 <code>TakeDamage</code> 事件</li>
+<li>如果玩家有圣盾，会触发 <code>RemoveEffect</code> 事件</li>
+</ul>
+</li>
+</ul>
+<p>虽然看起来很复杂，但你不必过于担心，你只需将引发的事件直接返回给引擎即可：</p>
+<pre><code class="language-lua">local player = ctx.getEntityOwner(entity) -- 找到实体的所有者
+return player.drawCard() -- 执行抽卡
+</code></pre>
+<p>你可能会好奇为什么这里的 <code>drawCard</code> 没有参数指定抽几张卡。
+原因是，多次抽卡的行为可能会被其他实体打断。</p>
+<p>例如，有一个实体的定义是“每当玩家抽一张卡，获得+1/+1”，显然这个“+1/+1”的效果应在每张卡到手后立即发生。</p>
+<p>那么，如何编写这种能力呢？以下是一个抽四张卡的例子：</p>
+<pre><code class="language-lua">local player = ctx.getEntityOwner(entity) -- 找到实体的所有者
+for _ = 1, 4 do
+  coroutine.yield(player.drawCard()) -- 执行抽卡
+end 
+</code></pre>
+<p>这里的 <code>coroutine.yield</code> 会将事件返回给引擎，并暂时放弃执行权，以便引擎可以让其他实体进行操作。</p>
+<p>之后我们需要设置 <code>listener</code>，将亡语的监听器添加到定义上：</p>
+<pre><code class="language-lua">definition.listener[EventType.Death] = on_death
+</code></pre>
+<p>全部的内容整合在一起是这样的：</p>
+<pre><code class="language-lua">local definition = EntityPrototype:new {
+    id = &quot;f96acaf7-537b-4222-b282-2f7382ac4a46&quot;,
+    name = &quot;2/1&quot;,
+    description = &quot;2/1亡语：抽四张牌&quot;,
+    fraction = Fraction.Neutral,
+    hp = 2,
+    attack = 1,
+    cost = 2,
+}
+
+local on_death = function(ctx, event, entity)
+  local player = ctx.getEntityOwner(entity) -- 找到实体所属的玩家
+  for _ = 1, 4 do
+    coroutine.yield(player.drawCard()) -- 执行抽卡
+  end
+end
+
+definition.listener[EventType.Death] = on_death
+
+return definition
+</code></pre>
+<p>就是这样，有关如何操作游戏状态的更多内容，请参考 API 章节。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="api"><a class="header" href="#api">API</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="阵营"><a class="header" href="#阵营">阵营</a></h1>
+<p>目前游戏有以下阵营，你需要通过全局常量来访问它们：</p>
+<ul>
+<li>中立 Neutral: <code>Fraction.Neutral</code></li>
+<li>混沌 Chaos: <code>Fraction.Chaos</code></li>
+<li>派派 Apex: <code>Fraction.Apex</code></li>
+<li>DD: <code>Fraction.DD</code></li>
+<li>歌 Bard: <code>Fraction.Bard</code></li>
+<li>雀 Mahjong: <code>Fraction.Mahjong</code></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="事件"><a class="header" href="#事件">事件</a></h1>
+<h2 id="事件类型-eventtype"><a class="header" href="#事件类型-eventtype">事件类型 EventType</a></h2>
+<p>你需要通过全局常量来访问这些事件类型：</p>
+<ul>
+<li>实体死亡：<code>EventType.Death</code></li>
+<li>玩家丢弃卡牌（包括使用）：<code>EventType.DiscardCard</code></li>
+<li>实体获得效果：<code>EventType.GiveEffect</code></li>
+<li>当前玩家变更：<code>EventType.PlayerChanged</code></li>
+<li>新实体生成：<code>EventType.Spawn</code></li>
+<li>玩家获得新卡牌：<code>EventType.ReceiveCard</code></li>
+<li>实体效果移除：<code>EventType.RemoveEffect</code></li>
+<li>实体受到伤害：<code>EventType.TakeDamage</code></li>
+</ul>
+<h2 id="创建事件"><a class="header" href="#创建事件">创建事件</a></h2>
+<p>通过 <code>Event:new</code> 来创建事件，不同的事件有不同的值需要填入，请务必小心。</p>
+<p>以下是一个例子：</p>
+<pre><code class="language-lua">Event:new {
+    event_type = EventType.Death,
+    id = &quot;4d4c9983-20de-43ff-8a39-da815583d6d9&quot;
+}
+</code></pre>
+<h2 id="事件值"><a class="header" href="#事件值">事件值</a></h2>
+<h3 id="eventtypedeath"><a class="header" href="#eventtypedeath">EventType.Death</a></h3>
+<h3 id="eventtypediscardcard"><a class="header" href="#eventtypediscardcard">EventType.DiscardCard</a></h3>
+<h3 id="eventtypegiveeffect"><a class="header" href="#eventtypegiveeffect">EventType.GiveEffect</a></h3>
+<h3 id="eventtypeplayerchanged"><a class="header" href="#eventtypeplayerchanged">EventType.PlayerChanged</a></h3>
+<h3 id="eventtypespawn"><a class="header" href="#eventtypespawn">EventType.Spawn</a></h3>
+<h3 id="eventtypereceivecard"><a class="header" href="#eventtypereceivecard">EventType.ReceiveCard</a></h3>
+<h3 id="eventtyperemoveeffect"><a class="header" href="#eventtyperemoveeffect">EventType.RemoveEffect</a></h3>
+<h3 id="eventtypetakedamage"><a class="header" href="#eventtypetakedamage">EventType.TakeDamage</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实用工具"><a class="header" href="#实用工具">实用工具</a></h1>
+<h3 id="utilsnewidstring"><a class="header" href="#utilsnewidstring">Utils.newId([string])</a></h3>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
