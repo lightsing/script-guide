@@ -13,7 +13,9 @@
 - 实体效果移除：`EventType.RemoveEffect`
 - 实体受到伤害：`EventType.TakeDamage`
 
-## 创建事件
+## Event
+
+### 创建事件
 
 通过 `Event:new` 来创建事件，不同的事件有不同的值需要填入，请务必小心。
 
@@ -26,13 +28,13 @@ Event:new {
 }
 ```
 
-## 事件值
+### 事件值
 
-### EventType.Death
-### EventType.DiscardCard
-### EventType.GiveEffect
-### EventType.PlayerChanged
-### EventType.Spawn
-### EventType.ReceiveCard
-### EventType.RemoveEffect
-### EventType.TakeDamage
+#### EventType.Death
+#### EventType.DiscardCard
+#### EventType.GiveEffect
+#### EventType.PlayerChanged
+#### EventType.Spawn
+#### EventType.ReceiveCard
+#### EventType.RemoveEffect
+#### EventType.TakeDamage
