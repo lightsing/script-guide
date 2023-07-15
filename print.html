@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="lua/index.html"><strong aria-hidden="true">1.</strong> Lua 环境</a></li><li class="chapter-item expanded "><a href="getting-started/index.html"><strong aria-hidden="true">2.</strong> 开始编写</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="getting-started/define-entity.html"><strong aria-hidden="true">2.1.</strong> 定义实体</a></li></ol></li><li class="chapter-item expanded "><a href="api/index.html"><strong aria-hidden="true">3.</strong> API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="api/fraction.html"><strong aria-hidden="true">3.1.</strong> 阵营</a></li><li class="chapter-item expanded "><a href="api/event.html"><strong aria-hidden="true">3.2.</strong> 事件</a></li><li class="chapter-item expanded "><a href="api/utils.html"><strong aria-hidden="true">3.3.</strong> 实用工具</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="lua/index.html"><strong aria-hidden="true">1.</strong> Lua 环境</a></li><li class="chapter-item expanded "><a href="getting-started/index.html"><strong aria-hidden="true">2.</strong> 开始编写</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="getting-started/define-entity.html"><strong aria-hidden="true">2.1.</strong> 定义实体</a></li></ol></li><li class="chapter-item expanded "><a href="api/index.html"><strong aria-hidden="true">3.</strong> API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="api/fraction.html"><strong aria-hidden="true">3.1.</strong> 阵营</a></li><li class="chapter-item expanded "><a href="api/effect.html"><strong aria-hidden="true">3.2.</strong> 效果</a></li><li class="chapter-item expanded "><a href="api/event.html"><strong aria-hidden="true">3.3.</strong> 事件</a></li><li class="chapter-item expanded "><a href="api/card.html"><strong aria-hidden="true">3.4.</strong> 卡牌</a></li><li class="chapter-item expanded "><a href="api/entity.html"><strong aria-hidden="true">3.5.</strong> 实体</a></li><li class="chapter-item expanded "><a href="api/player.html"><strong aria-hidden="true">3.6.</strong> 玩家</a></li><li class="chapter-item expanded "><a href="api/utils.html"><strong aria-hidden="true">3.7.</strong> 实用工具</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -363,14 +363,32 @@ return definition
 <div style="break-before: page; page-break-before: always;"></div><h1 id="api"><a class="header" href="#api">API</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="阵营"><a class="header" href="#阵营">阵营</a></h1>
 <p>目前游戏有以下阵营，你需要通过全局常量来访问它们：</p>
-<ul>
-<li>中立 Neutral: <code>Fraction.Neutral</code></li>
-<li>混沌 Chaos: <code>Fraction.Chaos</code></li>
-<li>派派 Apex: <code>Fraction.Apex</code></li>
-<li>DD: <code>Fraction.DD</code></li>
-<li>歌 Bard: <code>Fraction.Bard</code></li>
-<li>雀 Mahjong: <code>Fraction.Mahjong</code></li>
-</ul>
+<h3 id="fractionneutral"><a class="header" href="#fractionneutral">Fraction.Neutral</a></h3>
+<h3 id="fractionchaos"><a class="header" href="#fractionchaos">Fraction.Chaos</a></h3>
+<h3 id="fractionapex"><a class="header" href="#fractionapex">Fraction.Apex</a></h3>
+<h3 id="fractiondd"><a class="header" href="#fractiondd">Fraction.DD</a></h3>
+<h3 id="fractionbard"><a class="header" href="#fractionbard">Fraction.Bard</a></h3>
+<h3 id="fractionmahjong"><a class="header" href="#fractionmahjong">Fraction.Mahjong</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="效果"><a class="header" href="#效果">效果</a></h1>
+<h2 id="effecttype"><a class="header" href="#effecttype">EffectType</a></h2>
+<p>目前游戏有以下效果类型，你需要通过全局常量来访问它们：</p>
+<h3 id="effecttypetaunt"><a class="header" href="#effecttypetaunt">EffectType.Taunt</a></h3>
+<p>嘲讽</p>
+<h3 id="effecttypefrozen"><a class="header" href="#effecttypefrozen">EffectType.Frozen</a></h3>
+<p>冻结</p>
+<h3 id="effecttypefatigue"><a class="header" href="#effecttypefatigue">EffectType.Fatigue</a></h3>
+<p>休整</p>
+<h3 id="effecttypeshield"><a class="header" href="#effecttypeshield">EffectType.Shield</a></h3>
+<p>圣盾</p>
+<h3 id="effecttypepoisoned"><a class="header" href="#effecttypepoisoned">EffectType.Poisoned</a></h3>
+<p>中毒</p>
+<h3 id="effecttypesteal"><a class="header" href="#effecttypesteal">EffectType.Steal</a></h3>
+<p>潜行</p>
+<h3 id="effecttypewindfury"><a class="header" href="#effecttypewindfury">EffectType.Windfury</a></h3>
+<p>风怒</p>
+<h2 id="effectattrs"><a class="header" href="#effectattrs">EffectAttrs</a></h2>
+<p>效果属性，目前只包含 <code>duration</code>，即持续事件。</p>
+<h3 id="创建-effectattrsnewo"><a class="header" href="#创建-effectattrsnewo">创建 EffectAttrs:new([o])</a></h3>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="事件"><a class="header" href="#事件">事件</a></h1>
 <h2 id="事件类型-eventtype"><a class="header" href="#事件类型-eventtype">事件类型 EventType</a></h2>
 <p>你需要通过全局常量来访问这些事件类型：</p>
@@ -384,7 +402,8 @@ return definition
 <li>实体效果移除：<code>EventType.RemoveEffect</code></li>
 <li>实体受到伤害：<code>EventType.TakeDamage</code></li>
 </ul>
-<h2 id="创建事件"><a class="header" href="#创建事件">创建事件</a></h2>
+<h2 id="event"><a class="header" href="#event">Event</a></h2>
+<h3 id="创建事件"><a class="header" href="#创建事件">创建事件</a></h3>
 <p>通过 <code>Event:new</code> 来创建事件，不同的事件有不同的值需要填入，请务必小心。</p>
 <p>以下是一个例子：</p>
 <pre><code class="language-lua">Event:new {
@@ -392,15 +411,64 @@ return definition
     id = &quot;4d4c9983-20de-43ff-8a39-da815583d6d9&quot;
 }
 </code></pre>
-<h2 id="事件值"><a class="header" href="#事件值">事件值</a></h2>
-<h3 id="eventtypedeath"><a class="header" href="#eventtypedeath">EventType.Death</a></h3>
-<h3 id="eventtypediscardcard"><a class="header" href="#eventtypediscardcard">EventType.DiscardCard</a></h3>
-<h3 id="eventtypegiveeffect"><a class="header" href="#eventtypegiveeffect">EventType.GiveEffect</a></h3>
-<h3 id="eventtypeplayerchanged"><a class="header" href="#eventtypeplayerchanged">EventType.PlayerChanged</a></h3>
-<h3 id="eventtypespawn"><a class="header" href="#eventtypespawn">EventType.Spawn</a></h3>
-<h3 id="eventtypereceivecard"><a class="header" href="#eventtypereceivecard">EventType.ReceiveCard</a></h3>
-<h3 id="eventtyperemoveeffect"><a class="header" href="#eventtyperemoveeffect">EventType.RemoveEffect</a></h3>
-<h3 id="eventtypetakedamage"><a class="header" href="#eventtypetakedamage">EventType.TakeDamage</a></h3>
+<h3 id="事件值"><a class="header" href="#事件值">事件值</a></h3>
+<h4 id="eventtypedeath"><a class="header" href="#eventtypedeath">EventType.Death</a></h4>
+<h4 id="eventtypediscardcard"><a class="header" href="#eventtypediscardcard">EventType.DiscardCard</a></h4>
+<h4 id="eventtypegiveeffect"><a class="header" href="#eventtypegiveeffect">EventType.GiveEffect</a></h4>
+<h4 id="eventtypeplayerchanged"><a class="header" href="#eventtypeplayerchanged">EventType.PlayerChanged</a></h4>
+<h4 id="eventtypespawn"><a class="header" href="#eventtypespawn">EventType.Spawn</a></h4>
+<h4 id="eventtypereceivecard"><a class="header" href="#eventtypereceivecard">EventType.ReceiveCard</a></h4>
+<h4 id="eventtyperemoveeffect"><a class="header" href="#eventtyperemoveeffect">EventType.RemoveEffect</a></h4>
+<h4 id="eventtypetakedamage"><a class="header" href="#eventtypetakedamage">EventType.TakeDamage</a></h4>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="卡牌"><a class="header" href="#卡牌">卡牌</a></h1>
+<h2 id="cardprototype"><a class="header" href="#cardprototype">CardPrototype</a></h2>
+<h2 id="card"><a class="header" href="#card">Card</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实体"><a class="header" href="#实体">实体</a></h1>
+<h2 id="entity"><a class="header" href="#entity">Entity</a></h2>
+<h3 id="entityisdead"><a class="header" href="#entityisdead">Entity:isDead()</a></h3>
+<p>检查一个实体是否已经死亡。如果实体的血量加上血量修正值小于等于0，那么该实体被视为已经死亡。</p>
+<h3 id="entityhaseffecteffect"><a class="header" href="#entityhaseffecteffect">Entity:hasEffect(effect)</a></h3>
+<p>检查一个实体是否拥有某种效果。如果该实体当前的效果中包含给定的效果，那么返回 <code>true</code>；否则，返回 <code>false</code>。</p>
+<h4 id="参数类型"><a class="header" href="#参数类型">参数类型</a></h4>
+<p>effect: <a href="api/./effect.html#effecttype">EffectType</a></p>
+<h4 id="返回值"><a class="header" href="#返回值">返回值</a></h4>
+<p>boolean</p>
+<h3 id="entityremoveeffectactioneffect"><a class="header" href="#entityremoveeffectactioneffect">Entity:removeEffectAction(effect)</a></h3>
+<p>移除实体身上的一个效果。如果实体当前的效果中不包含给定的效果，那么会报错。如果成功移除效果，那么返回一个包含事件类型（RemoveEffect）和被移除效果的事件对象。</p>
+<h4 id="参数类型-1"><a class="header" href="#参数类型-1">参数类型</a></h4>
+<p>effect: <a href="api/./effect.html#effecttype">EffectType</a></p>
+<h4 id="返回值-1"><a class="header" href="#返回值-1">返回值</a></h4>
+<p><a href="api/./event.html#event">Event</a></p>
+<h3 id="entitygiveeffectactioneffect-effect_attrs"><a class="header" href="#entitygiveeffectactioneffect-effect_attrs">Entity:giveEffectAction(effect, effect_attrs)</a></h3>
+<p>给实体添加一个效果。该方法需要两个参数：效果类型和效果属性。如果成功添加效果，那么返回一个包含事件类型（GiveEffect）和添加的效果的事件对象。</p>
+<h4 id="参数类型-2"><a class="header" href="#参数类型-2">参数类型</a></h4>
+<p>effect: <a href="api/./effect.html#effecttype">EffectType</a></p>
+<p>effect_attrs: <a href="api/./effect.html#effectattrs">EffectAttrs</a></p>
+<h4 id="返回值-2"><a class="header" href="#返回值-2">返回值</a></h4>
+<p><a href="api/./event.html#event">Event</a></p>
+<h3 id="entitytakedamageactionamount-source"><a class="header" href="#entitytakedamageactionamount-source">Entity:takeDamageAction(amount, source)</a></h3>
+<p>实体受到伤害。该方法需要两个参数：伤害数值和伤害来源。如果实体有防护盾效果，那么会移除防护盾，并返回一个移除效果的事件对象。如果没有防护盾，那么会对实体造成伤害。如果伤害后实体死亡，那么返回一个包含事件类型（Death）和实体的事件对象。如果实体未死，那么返回一个包含事件类型（TakeDamage）、实体、伤害数值和伤害来源的事件对象。</p>
+<h4 id="参数类型-3"><a class="header" href="#参数类型-3">参数类型</a></h4>
+<p>amount: integer</p>
+<p>source: <a href="api/entity.html#entity">Entity</a></p>
+<h4 id="返回值-3"><a class="header" href="#返回值-3">返回值</a></h4>
+<p><a href="api/./event.html#event">Event</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="玩家"><a class="header" href="#玩家">玩家</a></h1>
+<h2 id="player"><a class="header" href="#player">Player</a></h2>
+<h3 id="playerdrawcardactions"><a class="header" href="#playerdrawcardactions">Player:drawCardActions()</a></h3>
+<p>玩家抽牌的行动。</p>
+<p>如果牌堆中没有剩余的卡片，那么玩家会进入疲劳状态，并且受到相当于疲劳值的伤害，然后返回一个包含受伤事件的事件列表。如果牌堆中还有卡片，那么会抽取牌堆中的最后一张卡，然后返回调用<code>receiveCardAction(card)</code>方法的结果。</p>
+<h4 id="参数类型-4"><a class="header" href="#参数类型-4">参数类型</a></h4>
+<p>N/A</p>
+<h4 id="返回值-4"><a class="header" href="#返回值-4">返回值</a></h4>
+<p>[<a href="api/./event.html#event">Event</a>]</p>
+<h3 id="playerreceivecardactionscard"><a class="header" href="#playerreceivecardactionscard">Player:receiveCardActions(card)</a></h3>
+<p>玩家接收卡片的行动。</p>
+<p>这个方法接受一个类型为<code>Card</code>的参数。它会首先创建一个包含<code>ReceiveCard</code>事件和该卡片的事件，并添加到一个事件列表中。然后，如果手牌的数量少于最大手牌数量，那么会将卡片添加到手牌中。否则，会创建一个包含<code>DiscardCard</code>事件和该卡片的事件，添加到事件列表中。最后返回事件列表。</p>
+<h4 id="参数类型-5"><a class="header" href="#参数类型-5">参数类型</a></h4>
+<p>card: <a href="api/./card.html#card">Card</a></p>
+<h4 id="返回值-5"><a class="header" href="#返回值-5">返回值</a></h4>
+<p>[<a href="api/./event.html#event">Event</a>]</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="实用工具"><a class="header" href="#实用工具">实用工具</a></h1>
 <h3 id="utilsnewidstring"><a class="header" href="#utilsnewidstring">Utils.newId([string])</a></h3>
 

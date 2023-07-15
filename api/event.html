@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../lua/index.html"><strong aria-hidden="true">1.</strong> Lua 环境</a></li><li class="chapter-item expanded "><a href="../getting-started/index.html"><strong aria-hidden="true">2.</strong> 开始编写</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting-started/define-entity.html"><strong aria-hidden="true">2.1.</strong> 定义实体</a></li></ol></li><li class="chapter-item expanded "><a href="../api/index.html"><strong aria-hidden="true">3.</strong> API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../api/fraction.html"><strong aria-hidden="true">3.1.</strong> 阵营</a></li><li class="chapter-item expanded "><a href="../api/event.html" class="active"><strong aria-hidden="true">3.2.</strong> 事件</a></li><li class="chapter-item expanded "><a href="../api/utils.html"><strong aria-hidden="true">3.3.</strong> 实用工具</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../lua/index.html"><strong aria-hidden="true">1.</strong> Lua 环境</a></li><li class="chapter-item expanded "><a href="../getting-started/index.html"><strong aria-hidden="true">2.</strong> 开始编写</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../getting-started/define-entity.html"><strong aria-hidden="true">2.1.</strong> 定义实体</a></li></ol></li><li class="chapter-item expanded "><a href="../api/index.html"><strong aria-hidden="true">3.</strong> API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../api/fraction.html"><strong aria-hidden="true">3.1.</strong> 阵营</a></li><li class="chapter-item expanded "><a href="../api/effect.html"><strong aria-hidden="true">3.2.</strong> 效果</a></li><li class="chapter-item expanded "><a href="../api/event.html" class="active"><strong aria-hidden="true">3.3.</strong> 事件</a></li><li class="chapter-item expanded "><a href="../api/card.html"><strong aria-hidden="true">3.4.</strong> 卡牌</a></li><li class="chapter-item expanded "><a href="../api/entity.html"><strong aria-hidden="true">3.5.</strong> 实体</a></li><li class="chapter-item expanded "><a href="../api/player.html"><strong aria-hidden="true">3.6.</strong> 玩家</a></li><li class="chapter-item expanded "><a href="../api/utils.html"><strong aria-hidden="true">3.7.</strong> 实用工具</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -179,7 +179,8 @@
 <li>实体效果移除：<code>EventType.RemoveEffect</code></li>
 <li>实体受到伤害：<code>EventType.TakeDamage</code></li>
 </ul>
-<h2 id="创建事件"><a class="header" href="#创建事件">创建事件</a></h2>
+<h2 id="event"><a class="header" href="#event">Event</a></h2>
+<h3 id="创建事件"><a class="header" href="#创建事件">创建事件</a></h3>
 <p>通过 <code>Event:new</code> 来创建事件，不同的事件有不同的值需要填入，请务必小心。</p>
 <p>以下是一个例子：</p>
 <pre><code class="language-lua">Event:new {
@@ -187,25 +188,25 @@
     id = &quot;4d4c9983-20de-43ff-8a39-da815583d6d9&quot;
 }
 </code></pre>
-<h2 id="事件值"><a class="header" href="#事件值">事件值</a></h2>
-<h3 id="eventtypedeath"><a class="header" href="#eventtypedeath">EventType.Death</a></h3>
-<h3 id="eventtypediscardcard"><a class="header" href="#eventtypediscardcard">EventType.DiscardCard</a></h3>
-<h3 id="eventtypegiveeffect"><a class="header" href="#eventtypegiveeffect">EventType.GiveEffect</a></h3>
-<h3 id="eventtypeplayerchanged"><a class="header" href="#eventtypeplayerchanged">EventType.PlayerChanged</a></h3>
-<h3 id="eventtypespawn"><a class="header" href="#eventtypespawn">EventType.Spawn</a></h3>
-<h3 id="eventtypereceivecard"><a class="header" href="#eventtypereceivecard">EventType.ReceiveCard</a></h3>
-<h3 id="eventtyperemoveeffect"><a class="header" href="#eventtyperemoveeffect">EventType.RemoveEffect</a></h3>
-<h3 id="eventtypetakedamage"><a class="header" href="#eventtypetakedamage">EventType.TakeDamage</a></h3>
+<h3 id="事件值"><a class="header" href="#事件值">事件值</a></h3>
+<h4 id="eventtypedeath"><a class="header" href="#eventtypedeath">EventType.Death</a></h4>
+<h4 id="eventtypediscardcard"><a class="header" href="#eventtypediscardcard">EventType.DiscardCard</a></h4>
+<h4 id="eventtypegiveeffect"><a class="header" href="#eventtypegiveeffect">EventType.GiveEffect</a></h4>
+<h4 id="eventtypeplayerchanged"><a class="header" href="#eventtypeplayerchanged">EventType.PlayerChanged</a></h4>
+<h4 id="eventtypespawn"><a class="header" href="#eventtypespawn">EventType.Spawn</a></h4>
+<h4 id="eventtypereceivecard"><a class="header" href="#eventtypereceivecard">EventType.ReceiveCard</a></h4>
+<h4 id="eventtyperemoveeffect"><a class="header" href="#eventtyperemoveeffect">EventType.RemoveEffect</a></h4>
+<h4 id="eventtypetakedamage"><a class="header" href="#eventtypetakedamage">EventType.TakeDamage</a></h4>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../api/fraction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../api/effect.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../api/utils.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../api/card.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -215,11 +216,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../api/fraction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../api/effect.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../api/utils.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../api/card.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
