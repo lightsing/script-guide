@@ -14,7 +14,7 @@ N/A
 
 #### 返回值
 
-[[Event](../event/event.md)]
+[[`Event`](../event/event.md)]
 
 ### Player:receiveCardActions(card)
 玩家接收卡片的行动。
@@ -29,4 +29,4 @@ card: [Card](../card/card.md)
 
 #### 返回值
 
-[[Event](../event/event.md)]
+[[`Event`](../event/event.md)]

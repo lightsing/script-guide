@@ -10,6 +10,8 @@
 
 实体原型有一些默认值，如果这些默认值符合你的期待，你无需特别提供：
 - 冲锋：charged；默认值为 `false`
+- 嘲讽：taunt；默认值为 `false`
+- 圣盾：shield；默认值为 `false`
 - 衍生卡牌定义：is_card；默认值为 `true`
 
 如果实体原型是衍生卡牌，你还需要提供以下信息：
@@ -93,7 +95,7 @@ end
 接下来，我们执行亡语的行为：
 ```lua
 local player = ctx.getEntityOwner(entity) -- 找到实体的所有者
-player.drawCard() -- 执行抽卡
+player.drawCardActions() -- 执行抽卡
 ```
 
 但这还不够，因为抽卡可能会引发事件：
@@ -106,7 +108,7 @@ player.drawCard() -- 执行抽卡
 虽然看起来很复杂，但你不必过于担心，你只需将引发的事件直接返回给引擎即可：
 ```lua
 local player = ctx.getEntityOwner(entity) -- 找到实体的所有者
-return player.drawCard() -- 执行抽卡
+return player.drawCardActions() -- 执行抽卡
 ```
 
 你可能会好奇为什么这里的 `drawCard` 没有参数指定抽几张卡。
@@ -118,7 +120,7 @@ return player.drawCard() -- 执行抽卡
 ```lua
 local player = ctx.getEntityOwner(entity) -- 找到实体的所有者
 for _ = 1, 4 do
-  coroutine.yield(player.drawCard()) -- 执行抽卡
+  coroutine.yield(player.drawCardActions()) -- 执行抽卡
 end 
 ```
 
@@ -144,7 +146,7 @@ local definition = EntityPrototype:new {
 local on_death = function(ctx, event, entity)
   local player = ctx.getEntityOwner(entity) -- 找到实体所属的玩家
   for _ = 1, 4 do
-    coroutine.yield(player.drawCard()) -- 执行抽卡
+    coroutine.yield(player.drawCardActions()) -- 执行抽卡
   end
 end
 

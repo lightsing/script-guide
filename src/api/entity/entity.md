@@ -25,7 +25,7 @@ effect: [EffectType](../effect/effect_type.md)
 
 #### 返回值
 
-[Event](./event.md#event)
+[`Event`](./event.md#event)
 
 ### Entity:giveEffectAction(effect, effect_attrs)
 给实体添加一个效果。该方法需要两个参数：效果类型和效果属性。如果成功添加效果，那么返回一个包含事件类型（GiveEffect）和添加的效果的事件对象。
@@ -38,7 +38,7 @@ effect_attrs: [EffectAttrs](../effect/effect_attrs.md)
 
 #### 返回值
 
-[Event](./event.md#event)
+[`Event`](./event.md#event)
 
 ### Entity:takeDamageAction(amount, source)
 实体受到伤害。该方法需要两个参数：伤害数值和伤害来源。如果实体有防护盾效果，那么会移除防护盾，并返回一个移除效果的事件对象。如果没有防护盾，那么会对实体造成伤害。如果伤害后实体死亡，那么返回一个包含事件类型（Death）和实体的事件对象。如果实体未死，那么返回一个包含事件类型（TakeDamage）、实体、伤害数值和伤害来源的事件对象。
@@ -51,4 +51,4 @@ source: [Entity](#entity)
 
 #### 返回值
 
-[Event](./event.md#event)
+[`Event`](./event.md#event)

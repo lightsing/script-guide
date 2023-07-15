@@ -7,3 +7,7 @@
 
 `Action` 代表该 API 会产生一个事件，它的返回值是 [`Event`](./event.md#event)。
 `Actions` 代表该 API 可能会产生复数个事件，它的返回值是一个 [`Event`](./event.md#event) 的数组。
+
+## 值得注意的细节
+
+- 不要在 table 中使用 `type` 字段，该字段是保留的并由引擎管理。

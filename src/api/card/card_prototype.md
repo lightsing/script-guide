@@ -11,3 +11,9 @@
 #### 返回值
 
 boolean
+
+### CardPrototype:isValidTarget(ctx, target)
+
+`CardTargetType.isValidTarget(ctx, card.target_type, target)` 的简便写法。
+
+参见 [`CardTargetType.isValidTarget`](./card_target_type.md#cardtargettypeisvalidtargetctx-target_type-target)

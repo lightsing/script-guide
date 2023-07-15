@@ -44,14 +44,28 @@
 
 ## 方法
 
-### CardTargetType.exist(type, ctx)
+### CardTargetType.exist(ctx, target_type)
 
 检查卡的目标类型是否存在，当类型为 `None` 是，也返回 `true`。
 
 #### 参数类型
 
-- `type`: [`CardTargetType`](#cardtargettype)
 - `ctx`: [`GameContext`](../game.md#gamecontext)
+- `target_type`: [`CardTargetType`](#cardtargettype)
+
+#### 返回值
+
+boolean
+
+### CardTargetType.isValidTarget(ctx, target_type, target)
+
+检查给定的目标是否满足当前的目标类型
+
+#### 参数类型
+
+- `ctx`: [`GameContext`](../game.md#gamecontext)
+- `target_type`: [`CardTargetType`](#cardtargettype)
+- `target`: UUid
 
 #### 返回值
 
