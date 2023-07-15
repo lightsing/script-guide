@@ -4,6 +4,7 @@
 - [开始编写](./getting-started/README.md)
   - [定义实体](./getting-started/define-entity.md)
   - [定义卡牌](./getting-started/define-card.md)
+  - [深入了解](./getting-started/dive-deep.md)
 - [API](./api/README.md)
   - [阵营](./api/fraction.md)
   - [效果](./api/effect/README.md)
