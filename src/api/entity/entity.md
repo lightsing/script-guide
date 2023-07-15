@@ -1,6 +1,6 @@
-# 实体
+# Entity
 
-## Entity
+## 方法
 
 ### Entity:isDead()
 检查一个实体是否已经死亡。如果实体的血量加上血量修正值小于等于0，那么该实体被视为已经死亡。
@@ -10,7 +10,7 @@
 
 #### 参数类型
 
-effect: [EffectType](./effect.md#effecttype)
+effect: [EffectType](../effect/effect_type.md)
 
 #### 返回值
 
@@ -21,7 +21,7 @@ boolean
 
 #### 参数类型
 
-effect: [EffectType](./effect.md#effecttype)
+effect: [EffectType](../effect/effect_type.md)
 
 #### 返回值
 
@@ -32,9 +32,9 @@ effect: [EffectType](./effect.md#effecttype)
 
 #### 参数类型
 
-effect: [EffectType](./effect.md#effecttype)
+effect: [EffectType](../effect/effect_type.md)
 
-effect_attrs: [EffectAttrs](./effect.md#effectattrs)
+effect_attrs: [EffectAttrs](../effect/effect_attrs.md)
 
 #### 返回值
 
