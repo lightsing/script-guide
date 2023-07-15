@@ -167,6 +167,11 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="api"><a class="header" href="#api">API</a></h1>
+<p>本节列出了所有你可以使用的 API。</p>
+<p>你可能已经注意到，部分 API 以 <code>Action</code> 或者 <code>Actions</code> 结尾。
+这表明这些 API 的调用会产生事件，在使用这些 API 的时候，你应当将产生的事件返回给引擎。</p>
+<p><code>Action</code> 代表该 API 会产生一个事件，它的返回值是 <a href="./event.html#event"><code>Event</code></a>。
+<code>Actions</code> 代表该 API 可能会产生复数个事件，它的返回值是一个 <a href="./event.html#event"><code>Event</code></a> 的数组。</p>
 
                     </main>
 
